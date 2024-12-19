@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "todos.apps.TodosConfig",
+    #3rd-party apps
     "rest_framework",
+    "corsheaders",
+    #local apps
+    "todos.apps.TodosConfig",
 ]
 
 REST_FRAMEWORK = {
@@ -50,12 +53,20 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware", #add cors middleware
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = (
+    "http://localhost:3000", #default React port
+    "http://localhost:8000", #default django port
+)
+
+CSRF_TRUSTED_ORIGINS = ["localhost:3000"]
 
 ROOT_URLCONF = "django_todo.urls"
 
